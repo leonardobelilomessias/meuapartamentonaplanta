@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 export function Community(){
     return(
@@ -21,9 +21,13 @@ export function Community(){
 function Item(){
     return(
         <>
-        <div>
-            <Typography color={'primary'} variant="subtitle2">{truncateText("Amei o atendimento, graças a Deus encontrei esse empreendimento",500)}</Typography>
-        </div>
+        <Box sx={{borderWidth:0.5,borderColor:"", border:" blue", marginBottom:"4px", p:1}}>
+            <Typography color={'primary'} variant="body1">{truncateText("Amei o atendimento, graças a Deus encontrei esse empreendimento",500)}
+            </Typography>
+            <Typography  variant="caption">
+                Amei o atendimento, graças a Deus encontrei esse empreendimento
+            </Typography>
+        </Box>
         </>
     )
 }

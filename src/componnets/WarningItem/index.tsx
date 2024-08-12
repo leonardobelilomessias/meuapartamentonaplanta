@@ -5,7 +5,7 @@ import { SvgIcon, SvgIconProps } from '@mui/material';
 
 export default function BoxBasic() {
   return (
-    <Box component="section" sx={{ p: 2,backgroundColor:blue[200], color:"whitesmoke", borderRadius:2 }}>
+    <Box component="section" sx={{ p: 2,backgroundColor:blue[200], color:"whitesmoke", borderRadius:2,display:"flex" }}>
       <LightBulbIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
       Seu perfil esta incompleto clique no link e preencha todos os dados.
     </Box>

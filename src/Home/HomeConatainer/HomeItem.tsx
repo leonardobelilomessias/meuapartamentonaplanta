@@ -1,14 +1,15 @@
 import { CardHouse } from "../../componnets/CardHouse";
 import HorizontalScroll from "../../componnets/HorizontalScroll";
+import { InfoItem } from "../../componnets/InfoItem";
 import { WarningItem } from "../../componnets/WarningItem";
 
 export function HomeComponent(){
     return(
         <>
-            <h2 style={{marginBottom:0}}>Bem vindo  Leonardo !</h2>
+            <h1 style={{marginBottom:0}}>Bem vindo  Leonardo !</h1>
             <p style={{margin:0}}>Confira o que preparamos para você.</p>
             <div>
-            <h3>Seu Poder de Compra</h3>
+                 <InfoItem/>
                 <WarningItem/>
             </div>
             <div>
