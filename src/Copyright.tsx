@@ -7,7 +7,7 @@ export default function Copyright() {
     <Typography variant="body2" color="white" align="center">
       {'Copyright © '}
       <MuiLink color="inherit" href="https://mui.com/">
-        apegarantido.com
+        comunidadeapenaplanta.com
       </MuiLink>{' '}
       {new Date().getFullYear()}.
     </Typography>

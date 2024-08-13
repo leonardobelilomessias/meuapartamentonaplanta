@@ -1,20 +1,26 @@
-import { Box, Button, Typography } from "@mui/material";
-
+import { People } from "@mui/icons-material";
+import { Box, Button, Divider, Paper, Rating, Stack, Typography } from "@mui/material";
+import StarIcon from '@mui/icons-material/Star';
+import { CommunityGalery } from "@/components/CommunityGalery";
 export function Community(){
     return(
-<div>
-        <div style={{display:"flex",flexDirection:"row", justifyItems:'center',alignItems:"center", alignContent:"center", justifyContent:"space-between", padding:'1rem' }}>
-        <h2 style={{margin:0, fontWeight:"bold"}}>Conversas</h2>
-        <Button style={{alignSelf:"end"}} variant="contained">Novo Topico</Button>
-        </div>
-        <div>
-            <Item/>
-            <Item/>
-            <Item/>
-            <Item/>
+        <>
+        <TopCommunity/>
+        <Forum/>
+        <Depoimments/>
+        </>
+    )
+}
 
-        </div>
-</div>
+
+function TopCommunity(){
+    const randomNumber = Math.floor(Math.random() * 40) + 100;
+    return(
+        <Stack>
+            <People color="primary"/>
+            <Typography variant="caption"> {randomNumber} Pessoas online</Typography>
+           
+        </Stack>
     )
 }
 
@@ -24,13 +30,75 @@ function Item(){
         <Box sx={{borderWidth:0.5,borderColor:"", border:" blue", marginBottom:"4px", p:1}}>
             <Typography color={'primary'} variant="body1">{truncateText("Amei o atendimento, graças a Deus encontrei esse empreendimento",500)}
             </Typography>
-            <Typography  variant="caption">
-                Amei o atendimento, graças a Deus encontrei esse empreendimento
+            <Box  sx={{flexDirection:"row"}}>
+            <Typography  variant="caption" sx={{mr:4}} color={'GrayText'}>
+                Fernanda Ventrine
             </Typography>
+            <Typography  variant="caption" color={'GrayText'}>
+               04/08/2024 10:45
+            </Typography>
+            </Box>
         </Box>
+            <Divider/>
         </>
     )
 }
+
+function Forum(){
+    return(
+        <>
+        <Paper sx={{p:2}}>
+        <div style={{display:"flex",flexDirection:"column",  justifyContent:"space-between", padding:'1rem' }}>
+        <Button style={{alignSelf:"end"}} size="small" variant="contained">Novo Topico</Button>
+        <Typography variant="h5" sx={{margin:0,p:0,  fontWeight:"bold", display:"flex" ,alignItems:'center', alignContent:"center"}}>Conversas 
+           <Typography ml={1} >{` (152)`}</Typography> 
+        </Typography>
+        </div>
+        <div>
+            <Item/>
+            <Item/>
+            <Item/>
+            <Item/>
+
+        </div>
+</Paper>
+        </>
+    )
+}
+
+
+function Depoimments(){
+    return(
+        <>
+        <Paper sx={{p:2, mb:4,mt:4}}>
+        <div style={{display:"flex",flexDirection:"column",  justifyContent:"space-between", padding:'1rem' }}>
+        <Button style={{alignSelf:"end"}} size="small" variant="contained">Novo Depoimento</Button>
+        <Typography variant="h5" sx={{margin:0,p:0,  fontWeight:"bold", display:"flex" ,alignItems:'center', alignContent:"center"}}>Depoimentos 
+           <Typography ml={1} >{` (152)`}</Typography> 
+        </Typography>
+        </div>
+        <div style={{display:'flex', flexDirection:"column"}}>
+            <Rating name="read-only" value={4.4} readOnly 
+             precision={0.5}
+             size="small"
+             emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+            />
+            <Item/>
+            <Rating name="read-only" value={4.4} readOnly 
+             precision={0.5}
+             size="small"
+             emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+            />
+            <Item/>
+
+            <Button sx={{mt:2,mb:0}}  > Ver Todos</Button>
+        </div>
+    </Paper>
+        </>
+    )
+}
+
+
 
 const truncateText = (text:string, maxLength:number) => {
     if (text.length > maxLength) {
@@ -38,3 +106,4 @@ const truncateText = (text:string, maxLength:number) => {
     }
     return text;
   };
+

@@ -6,7 +6,7 @@ import Link from '../src/Link';
 import ProTip from '../src/ProTip';
 import Copyright from '../src/Copyright';
 import { Home } from '../src/Home';
-import { Header } from '../src/componnets/Header';
+import { Header } from '../src/components/Header';
 
 export default function HomePage() {
   return (
