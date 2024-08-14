@@ -1,5 +1,6 @@
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { wrap } from "module";
+import Link from "next/link";
 import { ReactNode } from "react";
 
 export function InfoItem(){
@@ -10,7 +11,9 @@ export function InfoItem(){
             <div style={{display:"flex", alignItems:"center"}}>
 
             <h2 style={{padding:0,marginRight:"1rem"}}>Raio-x seu Perfil</h2>
-            <Button  variant="outlined" size="small" >Editar Perfil</Button>
+            <Link href={'/editar-perfil'}>
+                <Button  variant="outlined" size="small" >Editar Perfil</Button>
+            </Link>
             </div>
             <Typography  variant="subtitle1" fontWeight={"bold"} color={"primary"}>Detalhes</Typography>
         <div style={{display:"flex",flexWrap:"wrap"  }}>

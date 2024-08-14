@@ -1,10 +1,16 @@
-import { Box, Button, Container, FormControlLabel, FormLabel, MenuItem, Paper, Radio, RadioGroup, TextField } from "@mui/material";
+import { ArrowBack } from "@mui/icons-material";
+import { Box, Button, Container, FormControlLabel, FormLabel, MenuItem, Paper, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import Link from "next/link";
 
 export function EditProfile(){
     return(
   
-        <Container maxWidth="lg" style={{minHeight:'100vH'}} >
+        <Container maxWidth="lg" style={{minHeight:'100vH', marginBottom:'1rem'}} >
             <Paper sx={{mt:8,p:4}}>
+                <Link href={'/'}>
+                <Button sx={{mb:4}} variant="text"><ArrowBack   fontSize="small"/>  Voltar</Button>
+                </Link>
+                <Typography variant="h4" sx={{mb:4}} fontWeight={'bold'} >Editar Perfil Financeiro</Typography>
                 <BasicTextFields/>
             </Paper>
         </Container>

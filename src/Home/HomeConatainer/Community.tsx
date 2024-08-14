@@ -2,6 +2,7 @@ import { People } from "@mui/icons-material";
 import { Box, Button, Divider, Paper, Rating, Stack, Typography } from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 import { CommunityGalery } from "@/components/CommunityGalery";
+import Link from "next/link";
 export function Community(){
     return(
         <>
@@ -49,7 +50,9 @@ function Forum(){
         <>
         <Paper sx={{p:2}}>
         <div style={{display:"flex",flexDirection:"column",  justifyContent:"space-between", padding:'1rem' }}>
-        <Button style={{alignSelf:"end"}} size="small" variant="contained">Novo Topico</Button>
+        <Link style={{alignSelf:"end"}} href={'/novo-post'}>
+            <Button style={{alignSelf:"end"}} size="small" variant="contained">Novo Topico</Button>
+        </Link>
         <Typography variant="h5" sx={{margin:0,p:0,  fontWeight:"bold", display:"flex" ,alignItems:'center', alignContent:"center"}}>Conversas 
            <Typography ml={1} >{` (152)`}</Typography> 
         </Typography>

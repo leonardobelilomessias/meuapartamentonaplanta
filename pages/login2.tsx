@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import theme from '../../theme';
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -16,21 +16,20 @@ import { registerUser } from '@/lib/registerUser';
 import { FirebaseError } from 'firebase/app';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import theme from '@/theme';
+import { signInUser } from '@/lib/signinUser';
 const schema = yup.object().shape({
-  name: yup.string().required("Nome é obrigatório"),
   email: yup.string().email("Email inválido").required("Email é obrigatório"),
   password: yup.string().min(6, "A senha deve ter pelo menos 6 caracteres").required("Senha é obrigatória"),
-  phone: yup.string().min(10, "O telefone deve ter pelo menos 10 dígitos").required("Telefone é obrigatório"),
 });
 
  interface IFormInputs {
-  name:string
   email: string;
   password: string;
-  phone: string;
+
 }
 
-export default function Hero() {
+export default function login2() {
   return (
     <Box
       id="hero"
@@ -82,7 +81,7 @@ function HeadLine(){
         }}
         >
 
-        Seu Apartamento&nbsp;
+        Comunidade Apartamento&nbsp;
 
         </Typography>
         <Typography
@@ -101,6 +100,7 @@ function HeadLine(){
         >
         Na Planta
         </Typography>
+
     
     </>
   )
@@ -164,15 +164,15 @@ function FormFields(){
     console.log(data)
     try{
 
-      await registerUser(data);
+      await signInUser(data)
     }catch(error){
       if (error instanceof FirebaseError) {
-        if(error.code==='auth/email-already-in-use'){
+        if(error.code==='auth/invalid-credential'){
 
-          toast("Email já cadastrado. Faça login ou cadastre um novo email.");
+          toast("Usuario ou senhas incorretos. Tente novamente");
         }
         // Lidar com erros específicos do Firebase
-        console.error("Erro ao registrar:", error.code);
+      //  console.error("Erro ao registrar:", error.code);
       } else {
         // Lidar com outros tipos de erros (caso ocorra)
         console.error("Erro desconhecido:", error);
@@ -182,11 +182,27 @@ function FormFields(){
   return(
     <>
 <Stack   spacing={2} useFlexGap sx={{ width: { xs: '100%', sm: '70%' } }}>
+<Typography
+        variant="h4"
+        sx={{
+        p:0,
+        mt:{xs: 4, sm: 4},
+        display: 'flex',
+        fontWeight:"bold",
+        flexDirection: { xs: 'column', md: 'row',  },
+        alignSelf: 'center',
+        textAlign: 'center',
+        
+        }}
+        >
 
+        Login&nbsp;
+
+        </Typography>
 <Typography
   textAlign="center"
   color="text.secondary"
-  sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' },mt:{xs: 4, sm: 4} }}
+  sx={{ alignSelf: 'center', width: { sm: '100%', md: '80%' }, }}
 >
   Saiba como tornar a jornada do seu apartamento mais prazerosa e sem complicaçoes.
 </Typography>
@@ -195,19 +211,7 @@ function FormFields(){
       onSubmit={handleSubmit(onSubmit)}
       sx={{ display: 'flex', flexDirection: 'column', gap: 2, margin: '0 auto',  width:{xs:"90%",sm:"100%"} }}
     >
-      <TextField
-        size='small'
-        label="Nome"
-        {...register("name")}
-        error={!!errors.name}
-        helperText={errors.name?.message}
-      />
-      <TextField
-        label="Telefone"
-        {...register("phone")}
-        error={!!errors.phone}
-        helperText={errors.phone?.message}
-      />
+
       <TextField
       size='small'
         label="Email"
@@ -224,7 +228,7 @@ function FormFields(){
         helperText={errors.password?.message}
       />
   <Button type="submit" variant="contained" color="primary">
-    Cadastrar
+    Entrar
   </Button>
 </Box>
 <Typography variant="caption" textAlign="center" sx={{ opacity: 0.8 }}>

@@ -6,7 +6,7 @@ import { blue } from "@mui/material/colors";
  
 export  function Layout({ children }:{children:ReactNode}) {
   return (
-    <div style={{backgroundColor:"#f7f9fc"}}>
+    <div style={{backgroundColor:"white"}}>
       <Header/>
       <main >{children}</main>
       <Footer/>
