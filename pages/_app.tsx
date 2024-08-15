@@ -6,6 +6,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from '../src/theme';
 import { Layout } from '../src/components/Layout';
+import { AccontProvider } from '@/context/ContextAccount';
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
@@ -17,8 +18,10 @@ export default function MyApp(props: AppProps) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline  />
-
+  
+<AccontProvider>
           <Component {...pageProps} />
+</AccontProvider>
   
       </ThemeProvider>
     </AppCacheProvider>

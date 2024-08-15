@@ -14,7 +14,8 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import MapsHomeWorkRoundedIcon from '@mui/icons-material/MapsHomeWorkRounded';
 import Link from 'next/link';
-const pages = [ 'suporte','conta', 'sair'];
+import { useUserData } from '@/context/ContextAccount';
+const pages = [ {title:'suporte',link:'/suporte'},{title:'conta',link:'/conta'}, {title:'sair',link:'/'}];
 const settings = ['Perfil', 'Conta', 'Dashboard', 'Sair'];
 
 function ResponsiveAppBar() {
@@ -35,7 +36,11 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const {logOutUser}=useUserData()
+function logout(){
+  logOutUser()
+  handleCloseNavMenu()
+}
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -90,9 +95,11 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <Link  style={{textDecoration:"none", color:"GrayText"}} href={`${page.link}`}>
+                <MenuItem key={page.title} onClick={page.title==="sair"? logout: handleCloseUserMenu }>
+                  <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
+                </Link>
               ))}
             </Menu>
           </Box>
@@ -118,13 +125,14 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link  style={{textDecoration:"none"}} href={`/${page}`}>
+              <Link  style={{textDecoration:"none"}} href={`${page.link}`}>
               <Button
-                key={page}
+
+                key={page.title}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                {page}
+                {page.title}
               </Button>
                 </Link>
             ))}
@@ -153,8 +161,9 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem  key={setting} onClick={setting==="sair"? logout: handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
+                 { setting==="sair"&&<Typography textAlign="center">{setting}</Typography>}
                 </MenuItem>
               ))}
             </Menu>

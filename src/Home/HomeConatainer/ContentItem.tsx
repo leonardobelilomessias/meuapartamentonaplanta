@@ -77,8 +77,8 @@ function AccordionExpandDefault() {
           <Typography fontWeight={"bold"} >Raio-x do Bairro</Typography>
         </AccordionSummary>
         {
-          elemts.map((elm)=>{
-            if(elm.category ==='rai') return <ContentElement title={elm.title} link={elm.link} />
+          elemts.map((elm,index)=>{
+            if(elm.category ==='rai') return <ContentElement key={index} title={elm.title} link={elm.link} />
           })
         }
       </Accordion>

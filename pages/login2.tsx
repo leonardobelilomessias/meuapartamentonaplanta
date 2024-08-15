@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import SaveIcon from '@mui/icons-material/Save';
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -18,6 +19,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import theme from '@/theme';
 import { signInUser } from '@/lib/signinUser';
+import { LoadingButton } from '@mui/lab';
+import { useUserData } from '@/context/ContextAccount';
+import { useRouter } from 'next/router';
 const schema = yup.object().shape({
   email: yup.string().email("Email inválido").required("Email é obrigatório"),
   password: yup.string().min(6, "A senha deve ter pelo menos 6 caracteres").required("Senha é obrigatória"),
@@ -30,6 +34,17 @@ const schema = yup.object().shape({
 }
 
 export default function login2() {
+  const {id}=useUserData()
+  const router = useRouter();
+  React.useEffect(() => {
+    if (id) {
+      // Redireciona para a página de login se o ID estiver vazio
+      router.push('/');
+    }
+
+  }, [id, router]);
+
+
   return (
     <Box
       id="hero"
@@ -150,6 +165,7 @@ function VideoHeadLine(){
   )
 }
 function FormFields(){
+  const[load,setLoad]= React.useState(false)
   const {
     register,
     handleSubmit,
@@ -157,14 +173,15 @@ function FormFields(){
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
+  const {id,name,loginUser} = useUserData()
 
   const onSubmit = async (data: IFormInputs) => {
-   
-
+   setLoad(true)
+    
     console.log(data)
     try{
-
-      await signInUser(data)
+      await loginUser(data)
+  
     }catch(error){
       if (error instanceof FirebaseError) {
         if(error.code==='auth/invalid-credential'){
@@ -177,6 +194,8 @@ function FormFields(){
         // Lidar com outros tipos de erros (caso ocorra)
         console.error("Erro desconhecido:", error);
       }
+    }finally{
+      setLoad(false)
     }
   };
   return(
@@ -227,9 +246,20 @@ function FormFields(){
         error={!!errors.password}
         helperText={errors.password?.message}
       />
-  <Button type="submit" variant="contained" color="primary">
+  {
+    !load&&
+    <Button type="submit" variant="contained" color="primary">
     Entrar
-  </Button>
+    </Button>
+  }
+{
+  load && 
+   <LoadingButton variant="outlined" loading loadingPosition="center" startIcon={<SaveIcon />}>
+  Entrado
+  </LoadingButton>
+
+}
+
 </Box>
 <Typography variant="caption" textAlign="center" sx={{ opacity: 0.8 }}>
   Saima mais sobre nossos
