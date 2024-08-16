@@ -10,6 +10,7 @@
     "post-update": "echo \"codesandbox preview only, need an update\" && pnpm update --latest"
   },
   "dependencies": {
+    "@date-io/date-fns": "^3.0.0",
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
     "@emotion/server": "latest",
@@ -19,6 +20,8 @@
     "@mui/lab": "^5.0.0-alpha.173",
     "@mui/material": "latest",
     "@mui/material-nextjs": "latest",
+    "@mui/x-date-pickers": "^7.12.1",
+    "dayjs": "^1.11.12",
     "firebase": "^10.12.5",
     "next": "latest",
     "react": "latest",

@@ -3,6 +3,7 @@ import { Box, Button, Divider, Paper, Rating, Stack, Typography } from "@mui/mat
 import StarIcon from '@mui/icons-material/Star';
 import { CommunityGalery } from "@/components/CommunityGalery";
 import Link from "next/link";
+import { useUserData } from "@/context/ContextAccount";
 export function Community(){
     return(
         <>
@@ -15,6 +16,7 @@ export function Community(){
 
 
 function TopCommunity(){
+
     const randomNumber = Math.floor(Math.random() * 40) + 100;
     return(
         <Stack>
@@ -57,12 +59,12 @@ function Forum(){
            <Typography ml={1} >{` (152)`}</Typography> 
         </Typography>
         </div>
-        <div>
+        <div style={{display:'flex', flexDirection:"column"}}>
             <Item/>
             <Item/>
             <Item/>
             <Item/>
-
+            <Button sx={{mt:2,mb:0}}  > Ver Todos</Button>
         </div>
 </Paper>
         </>

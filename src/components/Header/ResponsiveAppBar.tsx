@@ -15,7 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import MapsHomeWorkRoundedIcon from '@mui/icons-material/MapsHomeWorkRounded';
 import Link from 'next/link';
 import { useUserData } from '@/context/ContextAccount';
-const pages = [ {title:'suporte',link:'/suporte'},{title:'conta',link:'/conta'}, {title:'sair',link:'/'}];
+const pages = [ {title:'Home',link:'/'}, {title:'suporte',link:'/suporte'},{title:'conta',link:'/conta'}, {title:'sair',link:'/'}];
 const settings = ['Perfil', 'Conta', 'Dashboard', 'Sair'];
 
 function ResponsiveAppBar() {
@@ -43,14 +43,14 @@ function logout(){
 }
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" >
         <Toolbar disableGutters>
+          <Link href={'/'} style={{display:'flex', alignItems:"center", color:'white', textDecoration:"none",}}>
           <MapsHomeWorkRoundedIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+         
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -59,11 +59,13 @@ function logout(){
               letterSpacing: '.2rem',
               color: 'inherit',
               textDecoration: 'none',
-              textTransform:"capitalize"
+              textTransform:"capitalize",
+              
             }}
-          >
+            >
           CANP
           </Typography>
+            </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -95,7 +97,7 @@ function logout(){
               }}
             >
               {pages.map((page) => (
-                <Link  style={{textDecoration:"none", color:"GrayText"}} href={`${page.link}`}>
+                <Link key={page.title}  style={{textDecoration:"none", color:"GrayText"}} href={`${page.link}`}>
                 <MenuItem key={page.title} onClick={page.title==="sair"? logout: handleCloseUserMenu }>
                   <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
@@ -103,12 +105,12 @@ function logout(){
               ))}
             </Menu>
           </Box>
+          <Link href={'/'} style={{ display:'flex', flexGrow:1, alignItems:"center", color:'white', textDecoration:"none", alignSelf:'center', marginRight:2}}>
           <MapsHomeWorkRoundedIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href="/"
+           
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -123,17 +125,19 @@ function logout(){
             CANP
           
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          </Link>
+          <Box sx={{  display: { xs: 'none', md: 'flex', alignItems:'center', alignContent:'center', marginRight:8 } }}>
             {pages.map((page) => (
-              <Link  style={{textDecoration:"none"}} href={`${page.link}`}>
-              <Button
+              <Link key={page.title}  style={{textDecoration:"none", }} href={`${page.link}`}>
+              <Typography
 
                 key={page.title}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                onClick={page.title==='sair'?logout:handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', marginRight:4 }}
+                variant='overline'
                 >
                 {page.title}
-              </Button>
+              </Typography>
                 </Link>
             ))}
           </Box>

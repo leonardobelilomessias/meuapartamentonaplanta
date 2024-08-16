@@ -7,9 +7,11 @@ import ProTip from '../ProTip';
 import Copyright from '../Copyright';
 import { BasicTabs } from './HomeConatainer/BasicTabs';
 import { Layout } from '../components/Layout';
+import { useUserData } from '@/context/ContextAccount';
 
 
 export  function Home() {
+
   return (
     <Layout>
     <Container maxWidth="lg" style={{minHeight:'100vH'}} >
