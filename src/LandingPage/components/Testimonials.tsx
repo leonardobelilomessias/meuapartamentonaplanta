@@ -18,7 +18,7 @@ const userTestimonials = [
       "I absolutely love how versatile this product is! Whether I'm tackling work projects or indulging in my favorite hobbies, it seamlessly adapts to my changing needs. Its intuitive design has truly enhanced my daily routine, making tasks more efficient and enjoyable.",
   },
   {
-    avatar: <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />,
+    avatar: <Avatar alt="Travis Howard" src="" />,
     name: 'Travis Howard',
     occupation: 'Lead Product Designer',
     testimonial:
