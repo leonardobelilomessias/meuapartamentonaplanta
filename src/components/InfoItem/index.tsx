@@ -58,7 +58,8 @@ export function InfoItem(){
     }
     const [power,setPower] = useState(0)
     useEffect(()=>{
-calcPower()
+
+        calcPower()
     },[dataFinanceProfile])
 
     return(

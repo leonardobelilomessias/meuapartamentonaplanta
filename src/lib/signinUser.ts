@@ -6,7 +6,8 @@ interface ILoginInputs {
     password: string;
   
   }
-export const signInUser = async (data: ILoginInputs): Promise<User> => {
+
+  export const signInUser = async (data: ILoginInputs): Promise<User> => {
   try {
     const { email, password } = data;
     const userCredential = await signInWithEmailAndPassword(auth, email, password);

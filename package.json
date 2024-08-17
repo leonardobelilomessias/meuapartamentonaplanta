@@ -29,7 +29,9 @@
     "react": "latest",
     "react-dom": "latest",
     "react-hook-form": "^7.52.2",
+    "react-swiper": "^0.1.5",
     "react-toastify": "^10.0.5",
+    "swiper": "^11.1.9",
     "yup": "^1.4.0"
   },
   "devDependencies": {

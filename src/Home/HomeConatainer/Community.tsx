@@ -60,7 +60,9 @@ function Forum(){
     const [page, setPage] = useState(1)
     const [amountPosts,setAmountPosts] =useState(0)
     useEffect(()=>{
-      loadposts()
+        return()=>{
+            loadposts()
+        }
     },[])
     const [posts,setPosts] = useState([] as INewPost[])
     const handleChange = async (event: React.ChangeEvent<unknown>, value: number) => {

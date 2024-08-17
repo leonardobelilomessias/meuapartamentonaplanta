@@ -69,18 +69,24 @@ async  function handleUserchange(){
 
  }
 
+ async function HandleAllDataOnInitialize(){
+  if (typeof window !== 'undefined') {
+    // Obter dados do localStorage
+    const idUserstoredData = localStorage.getItem('userId');
+    if (idUserstoredData) {
+    await   HandleGetDataFinance(idUserstoredData)
+    await   HandleGetUser(idUserstoredData)
+    setUserId(idUserstoredData);
+    }
+  }
+ }
+
 useEffect(() => {
     // Verifica se estamos no lado do cliente
+  return()=>{
+    HandleAllDataOnInitialize()
+  }
 
-    if (typeof window !== 'undefined') {
-      // Obter dados do localStorage
-      const idUserstoredData = localStorage.getItem('userId');
-      if (idUserstoredData) {
-        HandleGetDataFinance(idUserstoredData)
-        HandleGetUser(idUserstoredData)
-        setUserId(idUserstoredData);
-      }
-    }
   }, []);
   const saveUserId = (id:string) => {
     if (typeof window !== 'undefined') {

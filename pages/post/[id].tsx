@@ -24,9 +24,12 @@ export default function post(){
         console.log(data)
     }
     useEffect(()=>{
-        if(id ){
-            fetchPost()
+        return()=>{
+            if(id ){
+                fetchPost()
+            }
         }
+
     },[])
     const [post,setPost]  = useState({} as IPost)
     return(
