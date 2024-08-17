@@ -21,6 +21,7 @@ import { ShortViewHouse } from '../ShotViewHouse';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { formatPriceToBRL } from '@/utils/formatPrice';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import Link from 'next/link';
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -45,13 +46,16 @@ function RecipeReviewCard() {
 
   return (
     <Card sx={{ maxWidth: 305,minWidth: 250, marginRight:'1rem', marginBottom:'1rem'  }}>
+      <Link href={'/imovel/idaqui'}>
       <CardMedia
         component="img"
         height="194"
         image="https://www.novolar.com.br/wp-content/uploads/2024/06/27.-FACHADA-NOTURNA-200x200.webp"
         alt="Paella dish"
-      />
+        />
+        </Link>
       <CardContent>
+      <Link href={'/imovel/idaqui'} style={{textDecoration:"none"}}>
         <Typography color='black' variant="h6" >
             Condominio Sevilha
         </Typography>
@@ -59,6 +63,7 @@ function RecipeReviewCard() {
           <LocationOnIcon sx={{fontSize:'16px'}} />
             São Gabriel - Belo Horizonte
         </Typography>
+        </Link>
         <Box sx={{display:"flex", flexDirection:"row",gap:2}}>
 
             <Typography variant="overline" color="text.secondary">

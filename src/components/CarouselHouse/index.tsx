@@ -54,7 +54,7 @@ export function CarouselHouse() {
       return{width:300,height:190}
   }
   return (
-    <div className="slider-container">
+    <div className="slider-container" style={{display:"block"}}>
       <Slider asNavFor={nav2 || undefined} ref={sliderRef1} {...settingsFirst}  >
         <div>
         <Image height={getSizeScreen().height} width={getSizeScreen().width} alt='image' src={sevilha1} style={{alignSelf:"center"}} />

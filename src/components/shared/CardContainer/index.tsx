@@ -1,10 +1,10 @@
 import { Container, Paper } from "@mui/material";
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 
-export  function DefaultCard({children}:{children:ReactNode}){
+export  function DefaultCard({children, style}:{children:ReactNode,style?:CSSProperties}){
     return(
-        <Paper sx={{p:4}} >
+        <Paper sx={{p:4, ...style}} >
         {children}
         </Paper>
     )
