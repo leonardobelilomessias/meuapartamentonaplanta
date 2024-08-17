@@ -32,3 +32,25 @@ export interface IFormInputFinance {
     title: string;
     message: string;
   }
+
+  export interface INewSuportForm{
+
+    title: string;
+    message: string;
+  }
+  export interface INewSuport{
+    name?: string;
+    id?: string;
+    title?: string;
+    message?: string;
+    created_at:Date,
+    updated_at:Date
+  }
+
+  export interface IPost{
+    id:string 
+    title:string
+    message:string 
+    name:string
+    date:Date
+}

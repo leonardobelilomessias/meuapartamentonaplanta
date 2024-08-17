@@ -6,11 +6,9 @@ export async function getStorageFinanceProfile(id:string){
         // Obter dados do localStorage
         const storedData = localStorage.getItem('finance_profile')       
         if (storedData) {
-          console.log('pelo storage')
             return JSON.parse(storedData)
         }else{      
           const data =  await getFinanceProfile(id)     
-          console.log('fora do storage',data)
           return data
         }
       }

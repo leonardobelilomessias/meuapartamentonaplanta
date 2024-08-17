@@ -17,6 +17,7 @@ interface IDataUser{
     loginUser:(data:ILoginInputs)=>Promise<void>
     logOutUser:()=>void
     updateDataFinance:(id:string)=> Promise<void>
+    handleUserchange:()=> Promise<void>
 
 }
 
@@ -25,13 +26,16 @@ interface IDataUser{
  const TasksContext = createContext({} as IDataUser);
 
 function AccountCountext({children}:{children:ReactNode}){
+
 const [user, setUser] = useState({}as IUser)
+const [userChange, setUserChange] = useState(false)
 const router = useRouter()
 const [userId,setUserId]= useState("")
 const [dataFinanceProfile,setDataFinanceProfile] = useState({} as IFormInputFinance)
 async function HandleGetDataFinance(id:string){
   const data = await getStorageFinanceProfile(id)
   if(data){
+    console.log('handlege get data finance',data)
     saveStorageFinanceProfile(data)
     setDataFinanceProfile(data)
   }
@@ -39,6 +43,7 @@ async function HandleGetDataFinance(id:string){
 async function HandleGetUser(id:string){
   const data = await getStorageUser(id)
   if(data){
+    
     saveStorageUser(data)
     setUser(data)
   }
@@ -49,9 +54,21 @@ async function updateDataFinance(id:string){
   if(data){
     saveStorageFinanceProfile(data)
     setDataFinanceProfile(data)
+
   }
 
 }
+async  function handleUserchange(){
+  removeStorageUser()
+  const data = await getStorageUser(userId)
+  console.log('user change', data)
+  if(data){
+    saveStorageUser(data)
+    setUser(data)
+  }
+
+ }
+
 useEffect(() => {
     // Verifica se estamos no lado do cliente
 
@@ -76,7 +93,7 @@ async function loginUser(data:ILoginInputs) {
     const resp = await signInUser(data)
     setUserId(resp.uid)
     HandleGetDataFinance(resp.uid)
-    
+    HandleGetUser(resp.uid)
     saveUserId(resp.uid)
     if(resp.uid){
         router.push("/")
@@ -100,7 +117,7 @@ async function loginUser(data:ILoginInputs) {
 }
 
     return(
-        <TasksContext.Provider value={{user:user,id:userId,loginUser:loginUser,logOutUser:logOutUser, dataFinanceProfile:dataFinanceProfile,updateDataFinance:updateDataFinance}}>
+        <TasksContext.Provider value={{user:user,id:userId,loginUser:loginUser,logOutUser:logOutUser, dataFinanceProfile:dataFinanceProfile,updateDataFinance:updateDataFinance,handleUserchange:handleUserchange}}>
             {children}
         </TasksContext.Provider>
     )

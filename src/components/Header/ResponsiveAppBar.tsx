@@ -16,12 +16,24 @@ import MapsHomeWorkRoundedIcon from '@mui/icons-material/MapsHomeWorkRounded';
 import Link from 'next/link';
 import { useUserData } from '@/context/ContextAccount';
 const pages = [ {title:'Home',link:'/'}, {title:'suporte',link:'/suporte'},{title:'conta',link:'/conta'}, {title:'sair',link:'/'}];
+const notifications = [ {title:'Compre Hoje na planta',link:'/', message:"Super oportunidade para você hoje de compara seu novo apa...."},
+  {title:'Compre Hoje na planta',link:'/', message:"Super oportunidade para você hoje de compara seu novo apa...."},
+  ,{title:'Compre Hoje na planta',link:'/', message:"Super oportunidade para você hoje de compara seu novo apa...."},
+];
 const settings = ['Perfil', 'Conta', 'Dashboard', 'Sair'];
-
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { Divider } from '@mui/material';
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElNotification, setAnchorElNotification] = React.useState<null | HTMLElement>(null);
 
+  const handleOpenNavNotification = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNotification(event.currentTarget);
+  };
+  const handleCloseNavNotication = () => {
+    setAnchorElNotification(null);
+  };
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -142,34 +154,75 @@ function logout(){
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, gap:2 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenNavNotification} sx={{ p: 0 }}>
+                <NotificationsIcon sx={{color:'white', marginRight:"1rem"}}   />
+              </IconButton>
+            </Tooltip>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ display:"flex", mt: '45px', minWidth:'400px', alignContent:"center", alignItems:"center" }}
+              
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
+                
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
+                
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              
             >
               {settings.map((setting) => (
-                <MenuItem  key={setting} onClick={setting==="sair"? logout: handleCloseUserMenu}>
+                <MenuItem   key={setting} onClick={setting==="sair"? logout: handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                  { setting==="sair"&&<Typography textAlign="center">{setting}</Typography>}
                 </MenuItem>
               ))}
+            </Menu>
+            
+            <Menu
+              sx={{ mt: '45px', minWidth:'400px' , }}
+              
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+                
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+                
+              }}
+              open={Boolean(anchorElNotification)}
+              onClose={handleCloseNavNotication}
+              
+            >
+              {notifications.map((item,key) => (
+                <MenuItem style={{width:300,}}  key={key} onClick={ handleCloseNavNotication}>
+                  <Box textOverflow={'revert'}  sx={{display: "flex",flexDirection: "column",flexWrap: "nowrap",overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  <Typography fontWeight={'bold'} textOverflow={"revert-layer"} >{item?.title}</Typography>
+                 <Typography sx={{ overflow: "hidden",textOverflow: "ellipsis",whiteSpace: "nowrap"}} >{item?.message}</Typography>
+                 <Divider/>
+                  </Box>
+                </MenuItem>
+              ))}
+              <Button sx={{ alignSelf:"center", justifySelf:"center", width:"100%"}}>ver mais</Button>
             </Menu>
           </Box>
         </Toolbar>

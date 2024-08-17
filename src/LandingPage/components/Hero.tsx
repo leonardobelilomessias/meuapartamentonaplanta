@@ -108,7 +108,7 @@ function HeadLine(){
 
 function VideoHeadLine(){
   const matchesXs = useMediaQuery(theme.breakpoints.up('xs'));
-  console.log(matchesXs)
+
   return(
     <div>
   
@@ -159,8 +159,6 @@ function FormFields(){
   });
 
   const onSubmit = async (data: IFormInputs) => {
-   
-
     console.log(data)
     try{
 

@@ -3,7 +3,7 @@ import { formatPriceToBRL } from "@/utils/formatPrice";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { wrap } from "module";
 import Link from "next/link";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 export function InfoItem(){
     const {dataFinanceProfile} = useUserData()
@@ -31,29 +31,35 @@ export function InfoItem(){
         
     }
     function calcPower(){
+        
         if(nascimento>=1989){
             const resultYear = percent * 12
             const resultAllYears = resultYear  * 35
             const finalResult = resultAllYears + fgts+ handspay +sub
-            console.log(sub)
-            console.log(sub)
+            setPower(finalResult/1.8)
             return finalResult /1.8
         }
         if(nascimento>=1979){
             const resultYear = dataFinanceProfile.renda?dataFinanceProfile.renda:0*12
             const resultAllYears = resultYear * 30
             const finalResult = resultAllYears + fgts+ handspay
+            setPower(finalResult/1.8)
             return finalResult
         }
         if(nascimento<=1969){
             const resultYear = dataFinanceProfile.renda?dataFinanceProfile.renda:0*12
             const resultAllYears = resultYear * 25
             const finalResult = resultAllYears + fgts+ handspay
+            setPower(finalResult/1.8)
             return finalResult
         }
-        return 12
+        setPower(49000)
+        return 40000
     }
-    const [power,setPower] = useState(calcPower())
+    const [power,setPower] = useState(0)
+    useEffect(()=>{
+calcPower()
+    },[dataFinanceProfile])
 
     return(
         <Paper sx={{p:2,mb:1,mt:2}} >
@@ -88,7 +94,7 @@ export function InfoItem(){
         <Box sx={{display:"flex",mb:2}}>
             <Typography fontWeight={"bold"} mr={4} variant="h6">Poder de compra: </Typography>
                 
-                <Typography fontWeight={"bold"} color={"primary"} variant="h6" >{formatPriceToBRL(power)}</Typography>
+                <Typography fontWeight={"bold"} color={"primary"} variant="h6" >{power<=50000?"Dados insuficientes":formatPriceToBRL(power)}</Typography>
             </Box>
         </div>
         </Paper>

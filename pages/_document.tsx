@@ -9,7 +9,7 @@ import theme, { roboto } from '../src/theme';
 
 export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps) {
   return (
-    <Html lang="en" className={roboto.className} style={{paddingTop:0,marginTop:0, boxSizing: 'border-box'}}>
+    <Html lang="pt-br" className={roboto.className} style={{paddingTop:0,marginTop:0, boxSizing: 'border-box'}}>
       <Head>
         {/* PWA primary color */}
         <meta name="theme-color" content={theme.palette.primary.main} />

@@ -7,12 +7,10 @@ export async function getStorageUser(id:string){
         // Obter dados do localStorage
         const storedData = localStorage.getItem('user')       
         if (storedData) {
-            console.log('pelo storage', storedData)
             return JSON.parse(storedData)
         }else{      
 
           const data =  await getUserById(id)     
-          console.log('fora do storage',data)
           return data
         }
       }

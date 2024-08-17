@@ -173,12 +173,11 @@ function FormFields(){
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
   });
-  const {id,name,loginUser} = useUserData()
+  const {loginUser} = useUserData()
 
   const onSubmit = async (data: IFormInputs) => {
    setLoad(true)
-    
-    console.log(data)
+  
     try{
       await loginUser(data)
   
