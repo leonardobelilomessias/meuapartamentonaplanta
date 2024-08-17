@@ -1,0 +1,12 @@
+.customcarousel {
+
+    overflow: hidden;
+  }
+  
+  .customcarousel .image-gallery-slide img {
+    font-size: 320px;
+    background-color: red;
+    max-height: 200px;
+    background-color: red;
+    object-fit: cover; /* Opcional: Ajusta a imagem para cobrir a altura definida */
+  }
