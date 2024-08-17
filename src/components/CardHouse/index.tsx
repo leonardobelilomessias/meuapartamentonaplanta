@@ -15,7 +15,12 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Visibility } from '@mui/icons-material';
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Box, Divider, Grow } from '@mui/material';
+import { ShortViewHouse } from '../ShotViewHouse';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { formatPriceToBRL } from '@/utils/formatPrice';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -33,13 +38,13 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 function RecipeReviewCard() {
   const [expanded, setExpanded] = React.useState(false);
-
+  const [favorite,setFavorite] = React.useState(false)
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Card sx={{ maxWidth: 305,minWidth: 250, marginRight:'1rem'  }}>
+    <Card sx={{ maxWidth: 305,minWidth: 250, marginRight:'1rem', marginBottom:'1rem'  }}>
       <CardMedia
         component="img"
         height="194"
@@ -50,48 +55,52 @@ function RecipeReviewCard() {
         <Typography color='black' variant="h6" >
             Condominio Sevilha
         </Typography>
-        <Typography variant="subtitle2" color="text.secondary">
+        <Typography sx={{display:"flex",flexDirection:"row",alignItems:'center'}} variant="subtitle2" color="primary">
+          <LocationOnIcon sx={{fontSize:'16px'}} />
             São Gabriel - Belo Horizonte
         </Typography>
-        <div>
+        <Box sx={{display:"flex", flexDirection:"row",gap:2}}>
 
             <Typography variant="overline" color="text.secondary">
-                2 Quartos 1 Banheiro  
+                2 Quartos  
             </Typography>
-        </div>
-        <div>
-
             <Typography variant="overline" color="text.secondary">
-            1 garagem   Area 46m2 
+               1 Banheiro  
             </Typography>
-        </div>
+        </Box>
+        <Box sx={{display:"flex", flexDirection:"row",gap:2}}>
+            <Typography variant="overline" color="text.secondary">
+            1 garagem    
+            </Typography>
+            <Typography variant="overline" color="text.secondary">
+              Area 46m2 
+            </Typography>
+        </Box>
+        <Box sx={{display:"flex", flexDirection:"row",gap:2}}>
+
+            <Typography variant="h6" color="text.success">
+              {formatPriceToBRL(320000)}
+            </Typography>
+        </Box>
+
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" color='primary'>
-        <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-        
-          <FavoriteIcon />
-          <Typography variant='caption'>Curtir</Typography>
+      <Divider/>
+      <CardActions disableSpacing style={{display:"flex", flexDirection:"row", alignContent:"space-between", justifyContent:"space-around"}}>
+        <IconButton aria-label="add to favorites" color='primary' onClick={()=>{setFavorite(!favorite);console.log('favoritado')}}>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center'}} >
+          {!favorite?<FavoriteBorderIcon/>:
+          <Grow in={favorite}><FavoriteIcon /></Grow>
+          }
+          <Typography variant='caption'>Favoritar</Typography>
         </div>
         </IconButton>
         <IconButton aria-label="share" color='primary'>
         <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-          <ShareIcon />
-        <Typography variant='caption'>Compartilhar</Typography>
+          <WhatsAppIcon />
+        <Typography variant='caption'>Contato</Typography>
         </div>
         </IconButton>
-        <ExpandMore
-          expand={false}
-          onClick={handleExpandClick}
-          
-          aria-label="show more"
-        >
-            <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
-
-                <Visibility  color='primary' />
-                <Typography variant='caption' color={'primary'}>olhadinha</Typography>
-            </div>
-        </ExpandMore>
+        <ShortViewHouse/>
       </CardActions>
 
     </Card>
