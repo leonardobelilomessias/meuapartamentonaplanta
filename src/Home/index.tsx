@@ -8,15 +8,19 @@ import Copyright from '../Copyright';
 import { BasicTabs } from './HomeConatainer/BasicTabs';
 import { Layout } from '../components/Layout';
 import { useUserData } from '@/context/ContextAccount';
+import { ContainerToFixHeader } from '@/components/shared/ContainerToFixHeader';
 
 
 export  function Home() {
 
   return (
     <Layout>
-    <Container maxWidth="lg" style={{minHeight:'100vH'}} >
+    <ContainerToFixHeader >
+      <Box sx={{position:'fixed',left:0, borderRight:'1px solid', borderWidth:'1pxx', height:"100%", display:{xs:"none", sm:'block'}}}>
+        <h2>oi</h2>
+      </Box>
       <BasicTabs/>
-    </Container>
+    </ContainerToFixHeader>
     </Layout>
   );
 }

@@ -93,7 +93,7 @@ export function InfoItem(){
 
         </div>
         <Box sx={{display:"flex",mb:2}}>
-            <Typography fontWeight={"bold"} mr={4} variant="h6">Poder de compra: </Typography>
+            <Typography fontWeight={"bold"} mr={4} variant="h6">Potêncial de compra: </Typography>
                 
                 <Typography fontWeight={"bold"} color={"primary"} variant="h6" >{power<=50000?"Dados insuficientes":formatPriceToBRL(power)}</Typography>
             </Box>

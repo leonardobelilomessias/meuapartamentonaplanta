@@ -54,7 +54,7 @@ function logout(){
   handleCloseNavMenu()
 }
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Container maxWidth="xl" >
         <Toolbar disableGutters>
           <Link href={'/'} style={{display:'flex', alignItems:"center", color:'white', textDecoration:"none",}}>

@@ -20,7 +20,7 @@ import { blue } from '@mui/material/colors';
 import HotelIcon from '@mui/icons-material/Hotel';
 import BathtubIcon from '@mui/icons-material/Bathtub';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-
+import ElevatorIcon from '@mui/icons-material/Elevator';
 function generate(element: React.ReactElement) {
   return [0, 1, 2].map((value) =>
     React.cloneElement(element, {
@@ -38,23 +38,23 @@ export  function ListFeaturesHome() {
   const [secondary, setSecondary] = React.useState(false);
 
   return (
-    <Box sx={{ flexGrow: 1, display:"flex",gap:"1rem", marginTop:'2rem', marginBottom:"2rem", flexWrap:"wrap", alignItems:"center", justifyContent:"center" }}>
+    <Box sx={{ flexGrow: 1, display:"flex",gap:"1rem", marginTop:'2.2rem', marginBottom:"2.2rem", flexWrap:"wrap", alignItems:"center", justifyContent:"center" }}>
             <Box sx={{display:"flex",gap:'1rem'}}>
-                <BoxFeature title='Area' >
+                <BoxFeature title='Area 56M²' >
                       <StraightenIcon sx={{fontSize:"3rem"}} />
                 </BoxFeature>
 
-                <BoxFeature title='Quartos' >
+                <BoxFeature title='2 Quartos' >
                       <HotelIcon sx={{fontSize:"3rem"}} />
                 </BoxFeature >
             </Box>
             <Box sx={{display:"flex",gap:'1rem'}}>
 
-                <BoxFeature title='Banheiros' >
+                <BoxFeature title='1 Banheiro' >
                       <BathtubIcon sx={{fontSize:"3rem"}} />
                 </BoxFeature >
 
-                <BoxFeature title='Vagas' >
+                <BoxFeature title='1 Vaga' >
                       <DirectionsCarIcon sx={{fontSize:"3rem"}} />
                 
                 </BoxFeature >

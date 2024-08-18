@@ -29,6 +29,7 @@ import { createNewSupport } from '@/lib/createNewSupporte';
 import { ArrowBack } from '@mui/icons-material';
 import { CircularProgress, Paper } from '@mui/material';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import { SuporteScreen } from '@/SuporteScreen';
 
 
 
@@ -67,104 +68,13 @@ export default function suporte() {
     console.log(data);
   };
   return (
-    <ThemeProvider theme={defaultTheme}>
+
     <Layout>
-      <Container component="main" maxWidth="xs" sx={{minHeight:'90vh'}} >
-        <CssBaseline />
-{   (!load&&!created) &&     <Box
-          sx={{
-            marginTop: 4,
-            marginBottom:4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-            <SupportAgentIcon color='primary' sx={{color:'primary', fontSize:76}} />
-          
-          <Typography component="h1" variant="h5">
-            Suporte
-          </Typography>
-          <Typography  variant="body2">
-            Deixe sua mensagem em breva vamos entrar contato
-          </Typography>
-          <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{display:"flex", mt: 1 , gap:2, flexDirection:'column', minWidth:{xs:"100%",sm:550} }}>
-          <Controller
-          name="title"
-          
-          control={control}
-          defaultValue=''
-          render={({ field }) => (
-            <TextField
-            fullWidth
-              {...field}
-              label="Titulo"
-              variant="outlined"
-              error={!!errors.title}
-              helperText={errors.title?.message}
-            />
-          )}
-        />
-            <Controller
-          name="message"
-          control={control}
-          defaultValue=''
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label="Escreva aqui o texto da  sua mensagem..."
-              variant="outlined"
-              multiline 
-              rows={16}  fullWidth
-              error={!!errors.message}
-              helperText={errors.message?.message}
-            />)}/>
-
-   
-            { !load&&<Button size="large" type="submit" variant="contained"  fullWidth>Enviar</Button>}
-         {load && <LoadingButton size="large" variant="outlined" loading loadingPosition="center" startIcon={<SaveIcon />}>
-           Enviando
-          </LoadingButton>}
-          </Box>
-        </Box>}
-        { (!load&&created)&&<CreatedSuccessSuport/>}
-   
-      </Container>
+    <Container maxWidth="lg" style={{minHeight:'100vH'}} >
+      <SuporteScreen/>
+    </Container>
       </Layout>
-    </ThemeProvider>
+
   );
 }
-
-
-
-export function CreatedSuccessSuport(){
-  return(
-
-    <Paper  sx={{mt:8,p:4,display:"flex", flexDirection:"column" }}>
-    <Link href={'/'}>
-
-    <Button  sx={{mb:4, alignSelf:'end', justifySelf:"end"}} variant="text"><ArrowBack   fontSize="small"/>  Voltar ao inicio</Button>
-    </Link>
-    <Box sx={{display:"flex", alignItems:"center", flexDirection:'column', alignContent:'center'}}>
-    <Typography variant="h4" sx={{mb:4, textAlign:"center"}} fontWeight={'bold'} >Mensagem enviada com sucesso!</Typography>
-    <VerifiedIcon color="primary" sx={{fontSize:75, color:'primary'}} />
-     <Link href={'/suporte'}>
-    <Button  sx={{mb:4, alignSelf:'end', justifySelf:"end"}} variant="text">  Nova Mensagem</Button>
-    </Link>
-    
-    </Box>
-    
-</Paper>
-   
-  )
-}
-export  function LoadingItem() {
-  return (
-    <Box sx={{ display: 'flex', alignItems:'center', alignContent:'center', justifyContent:'center',alignSelf:'center' }}>
-      <CircularProgress />
-    </Box>
-  );
-}
-
-
 

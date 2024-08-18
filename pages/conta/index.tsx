@@ -25,6 +25,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Phone } from '@mui/icons-material';
 import { updateAccountUser } from '@/lib/updateAccountUser';
+import { ContainerToFixHeader } from '@/components/shared/ContainerToFixHeader';
 
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -88,7 +89,7 @@ export default function conta() {
     <Layout>
 
 
-      <Container component="main" maxWidth="xs" style={{minHeight:'90vh'}} >
+      <ContainerToFixHeader>
         <CssBaseline />
         <Box
           sx={{
@@ -167,7 +168,7 @@ export default function conta() {
           </Box>
         </Box>
 
-      </Container>
+      </ContainerToFixHeader>
       </Layout>
     </ThemeProvider>
   );
