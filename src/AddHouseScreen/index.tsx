@@ -12,6 +12,14 @@ import { LoadingButton } from '@mui/lab';
 import SaveIcon from '@mui/icons-material/Save';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { useRouter } from "next/router";
+import {v4 } from 'uuid'
+import axios from "axios";
+import { ModalSelectImage } from "./ModalSelectImage";
+import { Divider } from "@mui/material";
+import Image from "next/image";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { verifyFormdata } from "@/utils/verifyFormdata";
 
 // Interfaces
 interface Amenities {
@@ -100,26 +108,135 @@ const amenitiesFields = [
 
 export function AddHouseScreen() {
   const [load, setLoad] = React.useState(false);
-
+  const [messageModal,setMessageModal] = React.useState('')
+  const [show, setShow] = React.useState(false);
+  const [cover, setCover] = React.useState<File | null>(null);
+  const [previewCover, setPreviewCover] = React.useState<string | undefined>();
+  const router = useRouter();
+  const [files, setFiles] = React.useState<File[]>([]);
+  const [previewUrls, setPreviewUrls] = React.useState<string[]>([]);
+  const [folderName, setFolderName] = React.useState('');
+  const fileInputRef = React.useRef<HTMLInputElement | null>(null);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const { handleSubmit, control, formState: { errors } } = useForm<IValidationSchema>({
     resolver: yupResolver(validationSchema),
   });
-
   const onSubmit = async (data: IValidationSchema) => {
-    try {
-      setLoad(true);
-      // Simulate API call
-      toast(`Imóvel criado: ${data.title}`);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setLoad(false);
+    if (files.length <= 0) {
+      setMessageModal('Você precisa selecionar pelo menos uma imagem');
+      handleShow();
+      return;
     }
-    console.log(data);
+    if (!cover) {
+      setMessageModal('Você precisa selecionar uma capa');
+      handleShow();
+      return;
+    }
+    const formData = new FormData();
+    const formCover = new FormData();
+//teste
+    try {
+      
+      setLoad(true)
+      for (const file of files) {
+        formData.append('files', file);
+      }
+      formCover.append('files', cover);
+      const uuidv4 = v4().split('-')[0]
+      const slug = data.title.split(" ").join('-')+`-${uuidv4}`
+      Object.assign(data,{slug:slug})
+      const filesInFormData = formData.getAll('files');
+      toast(`operação realizado${data.title}`)
+       const response = await axios.post('/api/createproduct', data);
+      
+       const {id} = response.data
+       formData.append('bucket', `${id}`);
+       formCover.append('bucket', `${id}`);
+
+     
+      if(files.length>0){
+        const responseUploadImages = await axios.post('/api/image', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+      }
+      if(files.length>0){
+
+        const responseUploadCover= await axios.post('/api/uploadCover', formCover, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+      }
+
+      // if (response.status ==200) {
+      //   router.push(`/sucesso/${slug}`);
+      // }
+
+    } catch (error) {
+      console.error('Erro ao enviar os dados:', error);
+    }
+    finally{
+      setLoad(false)
+    }
+
+  }
+  const handleCoverChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    setCover(file);
+    if (file) {
+      setPreviewCover(URL.createObjectURL(file));
+    }
   };
+  const handleRemoveCover = () => {
+    setCover(null)
+    setPreviewCover('');
+    //fileInputRef.current.value = '';
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = Array.from(e.target.files || []);
+    setFiles((prevFiles) => [...prevFiles, ...selectedFiles]);
+  
+    const newPreviewUrls = selectedFiles.map((file) =>
+      URL.createObjectURL(file)
+    );
+    setPreviewUrls((prevUrls) => [...prevUrls, ...newPreviewUrls]);
+  };
+  const handleRemoveImage = (index: number) => {
+    setFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    setPreviewUrls((prevUrls) => prevUrls.filter((_, i) => i !== index));
+    if (fileInputRef.current) {
+      // Verifica se a referência não é null antes de acessar a propriedade value
+      (fileInputRef.current as HTMLInputElement).value = '';
+    }
+  };
+  const handleClickFileInput = () => {
+    const input = fileInputRef.current;
+    if (input) {
+      input.click();
+    }
+  };
+
+//   const onSubmit = async (data: IValidationSchema) => {
+//     try {
+//       setLoad(true);
+//       // Simulate API call
+//       toast(`Imóvel criado: ${data.title}`);
+//     } catch (e) {
+//       console.error(e);
+//     } finally {
+//       setLoad(false);
+//     }
+//     console.log(data);
+//   };
 
   return (
     <DefaultCard>
+
+        <ModalSelectImage show={show} handleClose={handleClose} messageModal={messageModal} />
       <ToastContainer />
       <Box sx={{ marginTop: 4, marginBottom: 4, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Typography component="h1" variant="h5">
@@ -154,7 +271,70 @@ export function AddHouseScreen() {
             />
           </Box>
         ))}
+        <Divider/>
+{/* uploaaa de imagens */}
+<div className="ltn__apartments-tab-content-inner">
+<Typography variant="h5">Imagens</Typography>
+                            <Box>
+                              <div className="col-md-12">
+                                <div className="input-item input-item-textarea ltn__custom-icon">
+                            <Typography variant="h6">Adiconar imagens  De Capa</Typography>
 
+                            <Button variant="contained" > 
+                                  <label>Imagem de Capa
+
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    ref={fileInputRef}
+                                    onChange={handleCoverChange}
+                                    style={{ display: 'none' }}
+                                    />
+                                    </label>
+                                </Button>
+                                    
+                                  {previewCover && (
+                                    <div className="image-preview">
+                                      <Image src={previewCover} alt="Capa" width={100} height={100} />
+                                      <button type="button" onClick={handleRemoveCover}>
+                                        <DeleteIcon />
+                                      </button>
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                              <div className="col-md-12">
+                                <div className="input-item input-item-textarea ltn__custom-icon">
+                            <Typography variant="h6">Adiconar imagens a galeria</Typography>
+                                <Button variant="contained">
+
+                                  <label>Adicionar imagens
+
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    multiple
+                                    ref={fileInputRef}
+                                    onChange={handleFileChange}
+                                    style={{ display: 'none' }}
+                                    />
+                                    </label>
+                                </Button>
+                                  <div className="image-previews">
+                                    {previewUrls.map((url, index) => (
+                                      <div className="image-preview" key={index}>
+                                        <Image src={url} alt={`Imagem ${index + 1}`} width={100} height={100} />
+                                        <button type="button" onClick={() => handleRemoveImage(index)}>
+                                          <DeleteIcon />
+                                        </button>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                              </div>
+                            </Box>
+                          </div>
+{/*  fim do upload de imagens */}
         {!load && <Button size="large" type="submit" variant="contained" fullWidth>Enviar</Button>}
         {load &&
           <LoadingButton size="large" variant="outlined" loading loadingPosition="center" startIcon={<SaveIcon />}>

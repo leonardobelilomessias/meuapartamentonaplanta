@@ -48,8 +48,8 @@ console.log('caminho',path)
       <Divider />
       <List>
         {navigationElementsAccount.map((item, index) => (
-        <Link href={item.link} style={{ textDecoration:"none", color:"inherit"}}>
-        <ListItem key={item.title} disablePadding sx={{backgroundColor:path===item.link? gray[100]:""}}>
+        <Link key={item.title} href={item.link} style={{ textDecoration:"none", color:"inherit"}}>
+        <ListItem  disablePadding sx={{backgroundColor:path===item.link? gray[100]:""}}>
           <ListItemButton >
             <ListItemIcon color='primary' sx={{color:path===item.link? blue[800]:""}}>
               { item.icon?<item.icon/>:<InboxIcon/>}
@@ -64,7 +64,7 @@ console.log('caminho',path)
       <Divider />
       <List>
         {navigationElementsTools.map((item, index) => (
-          <Link href={item.link} style={{ textDecoration:"none", color:"inherit"}}>
+          <Link key={item.title} href={item.link} style={{ textDecoration:"none", color:"inherit"}}>
           <ListItem key={item.title} disablePadding sx={{backgroundColor:path===item.link? gray[100]:""}}>
             <ListItemButton >
               <ListItemIcon color='primary' sx={{color:path===item.link? blue[800]:""}}>

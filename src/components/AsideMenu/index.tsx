@@ -46,7 +46,7 @@ export  function AsideMenu(props: Props) {
       <Divider />
       <List>
         {navigationElementsAccount.map((item, index) => (
-          <Link href={item.link} style={{ textDecoration:"none", color:"inherit",  }}>
+          <Link href={item.link} key={item.title} style={{ textDecoration:"none", color:"inherit",  }}>
           <ListItem key={item.title} disablePadding sx={{backgroundColor:path===item.link? gray[100]:""}}>
             <ListItemButton>
             <ListItemIcon color='primary' sx={{color:path===item.link? blue[700]:""}}>
@@ -62,7 +62,7 @@ export  function AsideMenu(props: Props) {
       <Divider />
       <List>
         {navigationElementsTools.map((item, index) => (
-        <Link href={item.link} style={{ textDecoration:"none", color:"inherit"}}>
+        <Link href={item.link} key={item.title} style={{ textDecoration:"none", color:"inherit"}}>
           <ListItem key={item.title} disablePadding sx={{backgroundColor:path===item.link? gray[100]:""}}>
             <ListItemButton >
               <ListItemIcon color='primary' sx={{color:path===item.link? blue[800]:""}}>
