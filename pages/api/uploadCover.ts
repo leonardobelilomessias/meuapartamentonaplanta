@@ -37,9 +37,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const typedFields = fields as FormidableFields;
     const typedFiles = files as FormidableFiles | Files;
-
     let fileArray: File[] = [];
-
+    
     if (typedFiles.files) {
       if (Array.isArray(typedFiles.files)) {
         fileArray = typedFiles.files;
@@ -47,15 +46,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         fileArray = [typedFiles.files];
       }
     }
-
+    
     const { bucket } = typedFields;
-
+    
     if (!bucket || bucket.length === 0) {
       return res.status(400).json({ error: 'Bucket is required and must be a non-empty array' });
     }
-
+    
     try {
       if (fileArray.length === 0) {
+        console.log('filessss cover', files)
         return res.status(400).json({ error: 'No files were uploaded' });
       }
       const fileFormidableArray = fileArray[0] as FormidableFile

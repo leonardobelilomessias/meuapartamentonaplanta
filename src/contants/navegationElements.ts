@@ -20,3 +20,9 @@ export const navigationElementsTools = [
   { title: 'Metas', link: "/metas", icon: FlagIcon },
   { title: 'Novo Imovel', link: "/novo-imovel", icon: '' }
 ];
+
+
+export const navigationDev = [
+  { title: 'Listar Produtos', link: '/painel-produtos', icon: '' },
+  { title: 'Novo Imovel', link: "/novo-imovel", icon: '' },
+];

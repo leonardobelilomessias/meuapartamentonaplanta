@@ -15,11 +15,12 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { navigationElementsAccount, navigationElementsTools } from '@/contants/navegationElements';
+import { navigationDev, navigationElementsAccount, navigationElementsTools } from '@/contants/navegationElements';
 import Link from 'next/link';
 import { blue } from '@mui/material/colors';
 import { useRouter } from 'next/router';
 import { gray } from '@/LandingPage/getLPTheme';
+import { DevListMenu } from '../dev/DevListMenu';
 
 const drawerWidth = 240;
 
@@ -74,8 +75,16 @@ export  function AsideMenu(props: Props) {
         </Link>
         ))}
       </List>
+      {/* apenas desenvolvimento */}
+      { process.env.NEXT_PUBLIC_LOCAL==='dev' &&
+      <DevListMenu/>
+      }
+      {/* fim  apenas desenvolvimento */}
     </div>
   
     </Box>
   );
 }
+
+
+

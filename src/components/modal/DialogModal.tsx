@@ -9,12 +9,26 @@ import DialogTitle from '@mui/material/DialogTitle';
 interface IModal{
     openModal:boolean
     setOpenModal:(value:boolean)=>void
-    ExecFunction:()=>void
+    ExecFunction?:()=>void
     message:string
-    title:string
+    title:string,
+
 }
 export  function DialogModal({openModal,setOpenModal,ExecFunction,message,title}:IModal) {
-  ;
+
+  if(ExecFunction?.length){
+
+    try{
+      ExecFunction()
+      setOpenModal(!openModal)
+
+    }catch(e){
+      console.log(e)
+    }
+    finally{
+
+    }
+  }
 
   const handleClickOpen = () => {
     setOpenModal(true);
@@ -23,12 +37,20 @@ export  function DialogModal({openModal,setOpenModal,ExecFunction,message,title}
   const handleClose = () => {
     setOpenModal(false);
   };
+async function  handleConfirme(){
+    if(ExecFunction){
+
+      try{
+       ExecFunction()
+        setOpenModal(false)
+      }catch(e){
+        console.log(e)
+      }
+    }
+  }
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        {title}
-      </Button>
       <Dialog
         open={openModal}
         onClose={handleClose}
@@ -44,8 +66,8 @@ export  function DialogModal({openModal,setOpenModal,ExecFunction,message,title}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={()=>handleClose()}>Cancelar</Button>
+          <Button onClick={()=>handleConfirme()} autoFocus>
             Sim
           </Button>
         </DialogActions>
