@@ -14,7 +14,7 @@ import { AmenitiesHouse } from "@/components/AmenitiesHouse";
 export  function ScreenHouse({id}:{id:string}){
     return(
 
-        <DefaultContainer style={{  marginBottom:"2rem", paddingTop: '64px'}}>
+        <DefaultContainer style={{  marginBottom:"2rem", }}>
             <CarouselHouse/>
                 {/* <DefaultCard>
                 </DefaultCard> */}
@@ -60,22 +60,17 @@ function DescriptionHouse(){
 }
 
 function LocationHouse(){
-    const defaultProps = {
-        center: {
-          lat: 10.99835602,
-          lng: 77.01502627
-        },
-        zoom: 11
-      };
     return(
         <Stack sx={{mb:'3rem', mt:'2.2rem'}}>
         <Typography sx={{marginBottom:"1rem"}} variant="h5" fontWeight={'600'}>Localização no mapa</Typography>
         <div style={{ height: '400px', width: '100%' }}>
-        <GoogleMapReact
-        // bootstrapURLKeys={{ key: "" }}
-        defaultCenter={defaultProps.center}
-        defaultZoom={defaultProps.zoom}>
-      </GoogleMapReact>
+        <iframe
+  width="100%"
+  height="100%"
+  loading="lazy"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBnn_SK-u5M9BYGIJQ8TDTssee0vJ_3v08
+  &q=SÃO+GABRIEL,BH&zoom=15">
+</iframe>
     </div>
         </Stack>
     )

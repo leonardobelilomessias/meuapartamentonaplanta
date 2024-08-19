@@ -15,7 +15,7 @@ import Image from 'next/image';
 const numbers =[0,1,2,3] 
 export default function SlideDefault() {
   return (
-    <>
+    <Box   >
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
@@ -45,7 +45,7 @@ export default function SlideDefault() {
         ))}
       </Swiper>
       
-    </>
+    </Box>
   );
 }
 

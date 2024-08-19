@@ -29,6 +29,7 @@ export function CarouselHouse() {
     slidesToShow: 1,
     slidesToScroll: 1,
     variableWidth: true,
+    arrows:false 
 
   };
   const settingsFirst = {
@@ -40,7 +41,9 @@ export function CarouselHouse() {
     slidesToShow: 1,
     slidesToScroll: 1,
     variableWidth: true,
-    adaptiveHeight: true
+    adaptiveHeight: true,
+
+    
   };
   function getSizeScreen(){
       const matchesXs = useMediaQuery(theme.breakpoints.up('xs'));
@@ -55,7 +58,7 @@ export function CarouselHouse() {
   }
   return (
     <div className="slider-container" style={{display:"block"}}>
-      <Slider asNavFor={nav2 || undefined} ref={sliderRef1} {...settingsFirst}  >
+      <Slider asNavFor={nav2 || undefined} ref={sliderRef1} {...settingsFirst} >
         <div>
         <Image height={getSizeScreen().height} width={getSizeScreen().width} alt='image' src={sevilha1} style={{alignSelf:"center"}} />
 

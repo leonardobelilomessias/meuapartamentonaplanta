@@ -70,9 +70,9 @@ export default function suporte() {
   return (
 
     <Layout>
-    <Container maxWidth="lg" style={{minHeight:'100vH'}} >
+  
       <SuporteScreen/>
-    </Container>
+
       </Layout>
 
   );

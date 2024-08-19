@@ -5,7 +5,10 @@ import { Footer } from "./Footer";
 import { blue } from "@mui/material/colors";
 import { useUserData } from "@/context/ContextAccount";
 import { useRouter } from "next/router";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { Box, Container, createTheme, ThemeProvider } from "@mui/material";
+import { ContainerToFixHeader } from "./shared/ContainerToFixHeader";
+import { AsideMenu } from "./AsideMenu";
+import { gray } from "@/LandingPage/getLPTheme";
 
 const defaultTheme = createTheme();
 export  function Layout({ children }:{children:ReactNode}) {
@@ -28,7 +31,17 @@ export  function Layout({ children }:{children:ReactNode}) {
       
     <div style={{backgroundColor:"white"}}>
       <Header/>
-      <main >{children}</main>
+      <ContainerToFixHeader>
+      <Box  sx={{display:{xs:"none", md:"flex"},width:{md:"20%",lg:'13%',xl:'13%',sm:"13%"}, borderRight:`solid 1px ${gray[200]}`,   }}>
+
+        <AsideMenu/>
+      </Box>
+      <Box sx={{ width:{xs:"100%",md:"80%",lg:"87%"}}} >
+      <Container maxWidth="lg">
+        {children}
+      </Container>
+      </Box>
+      </ContainerToFixHeader >
       <Footer/>
     </div>
     </ThemeProvider>

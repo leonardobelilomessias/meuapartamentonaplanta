@@ -22,6 +22,8 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { formatPriceToBRL } from '@/utils/formatPrice';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import Link from 'next/link';
+import { createFavorite } from '@/lib/createFavorite';
+import { useUserData } from '@/context/ContextAccount';
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -38,11 +40,25 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 function RecipeReviewCard() {
+  const {id} = useUserData()
   const [expanded, setExpanded] = React.useState(false);
   const [favorite,setFavorite] = React.useState(false)
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  async function handleFavorite(){
+    
+    if (!favorite){
+      await createFavorite(id)
+      setFavorite(!favorite)
+    }
+    if (favorite){
+
+      setFavorite(!favorite)
+    }
+
+  }
 
   return (
     <Card sx={{ maxWidth: 305,minWidth: 250, marginRight:'1rem', marginBottom:'1rem'  }}>
@@ -91,7 +107,7 @@ function RecipeReviewCard() {
       </CardContent>
       <Divider/>
       <CardActions disableSpacing style={{display:"flex", flexDirection:"row", alignContent:"space-between", justifyContent:"space-around"}}>
-        <IconButton aria-label="add to favorites" color='primary' onClick={()=>{setFavorite(!favorite);console.log('favoritado')}}>
+        <IconButton aria-label="add to favorites" color='primary' onClick={()=>{handleFavorite()}}>
         <div style={{display:'flex', flexDirection:'column', alignItems:'center'}} >
           {!favorite?<FavoriteBorderIcon/>:
           <Grow in={favorite}><FavoriteIcon /></Grow>

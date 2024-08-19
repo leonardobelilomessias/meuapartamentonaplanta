@@ -74,7 +74,7 @@ function Forum(){
         <Link style={{alignSelf:"end"}} href={'/novo-post'}>
             <Button style={{alignSelf:"end"}} size="small" variant="contained">Novo Topico</Button>
         </Link>
-        <Typography variant="h5" sx={{margin:0,p:0,  fontWeight:"bold", display:"flex" ,alignItems:'center', alignContent:"center"}}>Conversas 
+        <Typography variant="h5" sx={{margin:0,p:0,  fontWeight:"bold", display:"flex" ,alignItems:'center', alignContent:"center"}}>Dúvidas
            <Typography ml={1} >{` (152)`}</Typography> 
         </Typography>
         </div>

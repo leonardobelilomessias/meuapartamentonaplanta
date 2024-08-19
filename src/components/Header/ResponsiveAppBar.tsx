@@ -23,6 +23,7 @@ const notifications = [ {title:'Compre Hoje na planta',link:'/', message:"Super 
 const settings = ['Perfil', 'Conta', 'Dashboard', 'Sair'];
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Divider } from '@mui/material';
+import DrawerMenu from '../DrawerMenu';
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -80,6 +81,7 @@ function logout(){
             </Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <DrawerMenu>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -87,35 +89,12 @@ function logout(){
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-            >
+              >
               <MenuIcon />
+
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <Link key={page.title}  style={{textDecoration:"none", color:"GrayText"}} href={`${page.link}`}>
-                <MenuItem key={page.title} onClick={page.title==="sair"? logout: handleCloseUserMenu }>
-                  <Typography textAlign="center">{page.title}</Typography>
-                </MenuItem>
-                </Link>
-              ))}
-            </Menu>
+              </DrawerMenu>
+
           </Box>
           <Link href={'/'} style={{ display:'flex', flexGrow:1, alignItems:"center", color:'white', textDecoration:"none", alignSelf:'center', marginRight:2}}>
           <MapsHomeWorkRoundedIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -162,7 +141,7 @@ function logout(){
             </Tooltip>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp"  />
+                <Avatar sx={{ width: 32, height: 32 }}  alt="Remy Sharp"  />
               </IconButton>
             </Tooltip>
             <Menu

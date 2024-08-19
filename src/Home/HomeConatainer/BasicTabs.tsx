@@ -43,7 +43,7 @@ export  function BasicTabs() {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ flex:1 }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', mb:4 }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Inicio" {...a11yProps(0)} />

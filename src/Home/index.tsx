@@ -9,18 +9,15 @@ import { BasicTabs } from './HomeConatainer/BasicTabs';
 import { Layout } from '../components/Layout';
 import { useUserData } from '@/context/ContextAccount';
 import { ContainerToFixHeader } from '@/components/shared/ContainerToFixHeader';
+import { HomeContainer } from './HomeConatainer';
 
 
 export  function Home() {
 
   return (
     <Layout>
-    <ContainerToFixHeader >
-      <Box sx={{position:'fixed',left:0, borderRight:'1px solid', borderWidth:'1pxx', height:"100%", display:{xs:"none", sm:'block'}}}>
-        <h2>oi</h2>
-      </Box>
-      <BasicTabs/>
-    </ContainerToFixHeader>
+      <HomeContainer/>
+
     </Layout>
   );
 }
