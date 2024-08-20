@@ -26,6 +26,11 @@ export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps)
             type="text/css"
             href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
           />
+          <link
+            rel="stylesheet"
+            href="https://video-react.github.io/assets/video-react.css"
+          />
+          <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
         <DocumentHeadTags {...props} />
       </Head>
       <body style={{padding:0,margin:0, boxSizing: 'border-box'}}>

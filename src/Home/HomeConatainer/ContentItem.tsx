@@ -8,29 +8,31 @@ import { Bolt, Category } from '@mui/icons-material';
 import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import { Box, Button, Divider, Paper } from '@mui/material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import Link from 'next/link';
+import { blue } from '@mui/material/colors';
  
 function AccordionExpandDefault() {
     const elemts = [{
-      title:"Como financiar seu primeiro imovel",link:"#",category:"fin"},
-      {title:"Documentos para o financiamento",link:"#", category:"fin"},
-      {title:"partamento tipo vs Area Privativa",link:"#", category:"con"},
-      {title:"Qual melhor posição do apartamento",link:"#", category:"con"},
-      {title:"São gabriel coração de BH",link:"#", category:"rai"},
-      {title:"Nova pampulha - perto de tudo ",link:"#", category:"rai"},
-      {title:"Como fazer uma grana extra para o ape",link:"#", category:"dic"},
-      {title:"Melhores planos de pagamento",link:"#", category:"dic"},
+      title:"Como financiar seu primeiro imovel",link:"/video/aoksd",category:"fin"},
+      {title:"Documentos para o financiamento",link:"/video/aoksd", category:"fin"},
+      {title:"partamento tipo vs Area Privativa",link:"/video/aoksd", category:"con"},
+      {title:"Qual melhor posição do apartamento",link:"/video/aoksd", category:"con"},
+      {title:"São gabriel coração de BH",link:"/video/aoksd", category:"rai"},
+      {title:"Nova pampulha - perto de tudo ",link:"/video/aoksd", category:"rai"},
+      {title:"Como fazer uma grana extra para o ape",link:"/video/aoksd", category:"dic"},
+      {title:"Melhores planos de pagamento",link:"", category:"dic"},
 
 
     ]
     const elemtsBooks = [{
-      title:"Como financiar seu primeiro imovel",link:"#",category:"fin"},
-      {title:"Documentos para o financiamento",link:"#", category:"fin"},
-      {title:"partamento tipo vs Area Privativa",link:"#", category:"con"},
-      {title:"Qual melhor posição do apartamento",link:"#", category:"con"},
-      {title:"São gabriel coração de BH",link:"#", category:"rai"},
-      {title:"Nova pampulha - perto de tudo ",link:"#", category:"rai"},
-      {title:"Como fazer uma grana extra para o ape",link:"#", category:"dic"},
-      {title:"Melhores planos de pagamento",link:"#", category:"dic"},
+      title:"Como financiar seu primeiro imovel",link:"/video/aoksd",category:"fin"},
+      {title:"Documentos para o financiamento",link:"/video/aoksd", category:"fin"},
+      {title:"partamento tipo vs Area Privativa",link:"/video/aoksd", category:"con"},
+      {title:"Qual melhor posição do apartamento",link:"/video/aoksd", category:"con"},
+      {title:"São gabriel coração de BH",link:"/video/aoksd", category:"rai"},
+      {title:"Nova pampulha - perto de tudo ",link:"", category:"rai"},
+      {title:"Como fazer uma grana extra para o ape",link:"", category:"dic"},
+      {title:"Melhores planos de pagamento",link:"", category:"dic"},
 
 
     ]
@@ -128,9 +130,9 @@ export function ContentItem(){
 }
 
       
-function ContentElement({title,link, category}:{title:string,link:string, category?:string}){
+function ContentElement({title,link='teste', category}:{title:string,link:string, category?:string}){
   return(
-    <>
+    <Link href={link} style={{backgroundColor:"red", textDecoration:"none", color:blue[700]}}>
         <AccordionDetails >
         <div>
           <Box sx={{display:"flex", alignItems:'center',pb:1, pt:1 }}>
@@ -143,7 +145,7 @@ function ContentElement({title,link, category}:{title:string,link:string, catego
         </div>
         </AccordionDetails>
 
-    </>
+    </Link>
   )
 }
 function ContentElementBook({title,link, category}:{title:string,link:string, category?:string}){
